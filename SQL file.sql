@@ -389,4 +389,10 @@ FROM films
 GROUP BY release_year  
 HAVING AVG(duration) > 120;
 
+--JOIN
+SELECT title
+FROM films
+JOIN Movies
+ON title.ID and Movies.ID
+
 
