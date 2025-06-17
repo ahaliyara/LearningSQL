@@ -17,3 +17,33 @@ GROUP BY meals.meal_id
 ORDER BY cost DESC  
 LIMIT 3;
 
+WITH table_1 AS ( 
+  SELECT ...  
+  FROM ... 
+),  
+table_2 AS ( 
+  SELECT ...  
+  FROM ... 
+)  
+SELECT ...  
+FROM table_1  
+JOIN table_2 ON ...; 
+ 
+
+WITH costs_and_quantities AS (  
+ SELECT  
+   meals.meal_id,  
+   SUM(stocked_quantity) AS quantity,  
+   SUM(meal_cost * stocked_quantity) AS cost  
+ FROM meals  
+ JOIN stock ON meals.meal_id = stock.meal_id  
+ GROUP BY meals.meal_id 
+)   
+SELECT   
+ meal_id,  
+ quantity,  
+ cost  
+FROM costs_and_quantities  
+ORDER BY cost DESC  
+LIMIT 3;
+
