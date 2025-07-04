@@ -106,6 +106,27 @@ GROUP BY foodr_month
 ORDER BY foodr_month ASC 
 LIMIT 3;
 
+--Registrations running total - query
+WITH reg_dates AS ( 
+  SELECT 
+    user_id, 
+    MIN(order_date) AS reg_date 
+  FROM orders 
+  GROUP BY user_id),  
+  registrations AS ( 
+  SELECT 
+    DATE_TRUNC('month', reg_date) :: DATE AS foodr_month, 
+    COUNT(DISTINCT user_id) AS regs 
+  FROM reg_dates 
+  GROUP BY foodr_month)  
+SELECT 
+  foodr_month, 
+  regs, 
+  SUM(regs) OVER (ORDER BY foodr_month ASC) AS regs_rt 
+FROM registrations 
+ORDER BY foodr_month ASC 
+LIMIT 3;
+
 
 
 
