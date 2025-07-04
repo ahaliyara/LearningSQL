@@ -97,5 +97,15 @@ GROUP BY foodr_month
 ORDER BY foodr_month ASC 
 LIMIT 3;
 
+--Active users - query
+SELECT 
+  DATE_TRUNC('month', order_date) :: DATE AS foodr_month, 
+  COUNT(DISTINCT user_id) AS mau 
+FROM orders 
+GROUP BY foodr_month 
+ORDER BY foodr_month ASC 
+LIMIT 3;
+
+
 
 
