@@ -73,4 +73,13 @@ JOIN cost ON revenue.meal_id = cost.meal_id
 ORDER BY profit DESC  
 LIMIT 3; 
 
+--Registrations - setup
+SELECT 
+  user_id, 
+  MIN(order_date) AS reg_date 
+FROM orders 
+GROUP BY user_id 
+ORDER BY user_id 
+LIMIT 3;
+
 
